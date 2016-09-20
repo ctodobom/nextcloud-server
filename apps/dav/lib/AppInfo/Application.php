@@ -56,7 +56,8 @@ class Application extends App {
 		$container->registerService('ContactsManager', function($c) {
 			/** @var IAppContainer $c */
 			return new ContactsManager(
-				$c->query('CardDavBackend')
+				$c->query('CardDavBackend'),
+				$c->query('OCP\IL10N')
 			);
 		});
 
