@@ -34,6 +34,11 @@ use OCP\IURLGenerator;
 use OCP\IUserSession;
 use OCP\Notification\IManager;
 
+/**
+ * Class Notifications
+ *
+ * @package OCA\Comments\Controller
+ */
 class Notifications extends Controller {
 	/** @var Folder  */
 	protected $folder;
@@ -50,6 +55,17 @@ class Notifications extends Controller {
 	/** @var IUserSession  */
 	protected $userSession;
 
+	/**
+	 * Notifications constructor.
+	 *
+	 * @param string $appName
+	 * @param IRequest $request
+	 * @param ICommentsManager $commentsManager
+	 * @param Folder $folder
+	 * @param IURLGenerator $urlGenerator
+	 * @param IManager $notificationManager
+	 * @param IUserSession $userSession
+	 */
 	public function __construct(
 		$appName,
 		IRequest $request,

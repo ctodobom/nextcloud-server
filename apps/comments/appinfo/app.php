@@ -40,14 +40,14 @@ $activityManager = \OC::$server->getActivityManager();
 $activityManager->registerExtension(function() {
 	$application = new \OCP\AppFramework\App('comments');
 	/** @var \OCA\Comments\Activity\Extension $extension */
-	$extension = $application->getContainer()->query('OCA\Comments\Activity\Extension');
+	$extension = $application->getContainer()->query(\OCA\Comments\Activity\Extension::class);
 	return $extension;
 });
 
 $managerListener = function(\OCP\Comments\CommentsEvent $event) use ($activityManager) {
 	$application = new \OCP\AppFramework\App('comments');
 	/** @var \OCA\Comments\Activity\Listener $listener */
-	$listener = $application->getContainer()->query('OCA\Comments\Activity\Listener');
+	$listener = $application->getContainer()->query(\OCA\Comments\Activity\Listener::class);
 	$listener->commentEvent($event);
 };
 $eventDispatcher->addListener(\OCP\Comments\CommentsEvent::EVENT_ADD, $managerListener);
@@ -62,7 +62,7 @@ $eventDispatcher->addListener(\OCP\Comments\CommentsEntityEvent::EVENT_ENTITY, f
 $notificationListener = function(\OCP\Comments\CommentsEvent $event) {
 	$application = new \OCP\AppFramework\App('comments');
 	/** @var \OCA\Comments\Notification\Listener $listener */
-	$listener = $application->getContainer()->query('OCA\Comments\Notification\Listener');
+	$listener = $application->getContainer()->query(\OCA\Comments\Notification\Listener::class);
 	$listener->evaluate($event);
 };
 $eventDispatcher->addListener(\OCP\Comments\CommentsEvent::EVENT_ADD, $notificationListener);
@@ -70,12 +70,8 @@ $eventDispatcher->addListener(\OCP\Comments\CommentsEvent::EVENT_ADD, $notificat
 $notificationManager = \OC::$server->getNotificationManager();
 $notificationManager->registerNotifier(
 	function() {
-		return new \OCA\Comments\Notification\Notifier(
-			\OC::$server->getL10NFactory(),
-			\OC::$server->getUserFolder(),
-			\OC::$server->getCommentsManager(),
-			\OC::$server->getUserManager()
-		);
+		$application = new \OCP\AppFramework\App('comments');
+		return $application->getContainer()->query(\OCA\Comments\Notification\Notifier::class);
 	},
 	function () {
 		$l = \OC::$server->getL10N('comments');
