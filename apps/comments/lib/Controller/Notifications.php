@@ -3,6 +3,8 @@
 /**
  * @author Arthur Schiwon <blizzz@arthur-schiwon.de>
  *
+ * @license GNU AGPL version 3 or any later version
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
  * License as published by the Free Software Foundation; either
