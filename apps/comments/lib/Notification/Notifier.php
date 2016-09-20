@@ -73,13 +73,12 @@ class Notifier implements INotifier {
 		}
 		$l = $this->l10nFactory->get('comments', $languageCode);
 		$displayName = $comment->getActorId();
+		$isDeletedActor = $comment->getActorType() === ICommentsManager::DELETED_USER;
 		if($comment->getActorType() === 'users') {
 			$commenter = $this->userManager->get($comment->getActorId());
 			if(!is_null($commenter)) {
 				$displayName = $commenter->getDisplayName();
 			}
-		} else if($comment->getActorType() === ICommentsManager::DELETED_USER) {
-			$displayName = $l->t('a now deleted user');
 		}
 		switch($notification->getSubject()) {
 			case 'mention':
@@ -92,12 +91,18 @@ class Notifier implements INotifier {
 					throw new \InvalidArgumentException('Cannot resolve file id to Node instance');
 				}
 				$fileName = $nodes[0]->getName();
-				$notification->setParsedSubject(
-					(string) $l->t(
+				if($isDeletedActor) {
+					$subject = (string) $l->t(
+						'You were mentioned in a comment on "%s" by a now deleted user.',
+						[ $fileName ]
+					);
+				} else {
+					$subject = (string) $l->t(
 						'You were mentioned in a comment on "%s" by %s.',
 						[ $fileName, $displayName ]
-					)
-				);
+					);
+				}
+				$notification->setParsedSubject($subject);
 
 				return $notification;
 				break;
