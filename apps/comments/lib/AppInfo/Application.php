@@ -31,19 +31,6 @@ class Application extends App {
 		parent::__construct('comments', $urlParams);
 		$container = $this->getContainer();
 
-		$container->registerService('NotificationsController', function(IContainer $c) {
-			/** @var \OC\Server $server */
-			$server = $c->query('ServerContainer');
-
-			return new Notifications(
-				$c->query('AppName'),
-				$server->getRequest(),
-				$server->getCommentsManager(),
-				$server->getUserFolder(),
-				$server->getURLGenerator(),
-				$server->getNotificationManager(),
-				$server->getUserSession()
-			);
-		});
+		$container->registerAlias('NotificationsController', Notifications::class);
 	}
 }
