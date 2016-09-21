@@ -144,7 +144,7 @@ class NotifierTest extends TestCase {
 			->method('getActorId')
 			->willReturn('huraga');
 		$this->comment
-			->expects($this->once())
+			->expects($this->any())
 			->method('getActorType')
 			->willReturn('users');
 
@@ -198,10 +198,10 @@ class NotifierTest extends TestCase {
 			->with($message);
 
 		$this->l
-			->expects($this->exactly(2))
+			->expects($this->once())
 			->method('t')
-			->withConsecutive([$displayName], ['You were mentioned in a comment on "%s" by %s.', [$fileName, $displayName]])
-			->willReturnOnConsecutiveCalls($displayName, $message);
+			->with('You were mentioned in a comment on "%s" by a now deleted user.', [ $fileName ])
+			->willReturn($message);
 
 		$this->l10nFactory
 			->expects($this->once())
@@ -349,7 +349,7 @@ class NotifierTest extends TestCase {
 			->method('getActorId')
 			->willReturn('huraga');
 		$this->comment
-			->expects($this->once())
+			->expects($this->any())
 			->method('getActorType')
 			->willReturn('users');
 
@@ -413,7 +413,7 @@ class NotifierTest extends TestCase {
 			->method('getActorId')
 			->willReturn('huraga');
 		$this->comment
-			->expects($this->once())
+			->expects($this->any())
 			->method('getActorType')
 			->willReturn('users');
 
@@ -479,7 +479,7 @@ class NotifierTest extends TestCase {
 			->method('getActorId')
 			->willReturn('huraga');
 		$this->comment
-			->expects($this->once())
+			->expects($this->any())
 			->method('getActorType')
 			->willReturn('users');
 

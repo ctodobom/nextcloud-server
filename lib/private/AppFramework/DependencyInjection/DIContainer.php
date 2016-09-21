@@ -160,7 +160,7 @@ class DIContainer extends SimpleContainer implements IAppContainer {
 			return $this->getServer()->getRootFolder();
 		});
 
-		$this->registerService('OCP\\Files\\Folder', function($c) {
+		$this->registerService('OCP\\Files\\Folder', function() {
 			return $this->getServer()->getUserFolder();
 		});
 
