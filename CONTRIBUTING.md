@@ -33,7 +33,14 @@ In order to constantly increase the quality of our software we can no longer acc
 It is a must have that changed and added code segments are unit tested.
 In some areas unit testing is hard (aka almost impossible) as of today - in these areas refactoring WHILE fixing a bug is encouraged to enable unit testing.
 
+We use the Developer Certificate of Origin (DCO) as a additional safeguard for the Nextcloud project. This is a well established and widely used mechanism to assure contributors have confirmed their right to license their contribution under the project's license.
+Please read this document to learn how to verify the DCO: [contribute/SubmittingPullRequests.md][submittingpullrequests]
+
+In case you are not sure how to add or update the license header correctly please have a look at [contribute/HowToApplyALicense.md][applyalicense]
+
 [devmanual]: https://docs.nextcloud.org/server/10/developer_manual/
+[submittingpullrequests]: https://github.com/nextcloud/server/blob/master/contribute/SubmittingPullRequests.md
+[applyalicense]: https://github.com/nextcloud/server/blob/master/contribute/HowToApplyALicense.md
 
 ## Translations
 Please submit translations via [Transifex][transifex].
